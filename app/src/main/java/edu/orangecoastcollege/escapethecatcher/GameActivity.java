@@ -21,8 +21,8 @@ public class GameActivity extends AppCompatActivity {
     final int FLING_THRESHOLD = 500;
 
     //BOARD INFORMATION
-    final int SQUARE = 200;
-    final int OFFSET = 5;
+    final int SQUARE = 165;
+    final int OFFSET = 10;
     final int COLS = 8;
     final int ROWS = 8;
     final int gameBoard[][] = {
@@ -73,10 +73,8 @@ public class GameActivity extends AppCompatActivity {
 
     private void startNewGame() {
         //TASK 1:  CLEAR THE BOARD (ALL IMAGE VIEWS)
-        for (int i = 0; i < allGameObjects.size(); i++) {
-            ImageView visualObj = allGameObjects.get(i);
-            activityGameRelativeLayout.removeView(visualObj);
-        }
+        for (ImageView gameObject : allGameObjects)
+            activityGameRelativeLayout.removeView(gameObject);
         allGameObjects.clear();
 
         //TASK 2:  REBUILD THE  BOARD
@@ -93,7 +91,31 @@ public class GameActivity extends AppCompatActivity {
     private void buildGameBoard() {
         // TODO: Inflate the entire game board (obstacles and exit)
         // TODO: (everything but the player and zombie)
+        ImageView inflate;
+        for (int i = 0; i < ROWS; i++) {
+            for (int j = 0; j < COLS; j++) {
+                switch (gameBoard[i][j]) {
+                    case BoardCodes.OBSTACLE:
+                        inflate = (ImageView) layoutInflater.inflate(R.layout.obstacle_layout, null);
+                        break;
+                    case BoardCodes.EXIT:
+                        inflate = (ImageView) layoutInflater.inflate(R.layout.exit_layout, null);
+                        exitRow = i;
+                        exitCol = j;
+                        break;
+                    default:
+                        inflate = null;
+                        break;
+                }
+                if (inflate != null) {
+                    inflate.setX(j * SQUARE + OFFSET);
+                    inflate.setY(i * SQUARE + OFFSET);
 
+                    activityGameRelativeLayout.addView(inflate);
+                    allGameObjects.add(inflate);
+                }
+            }
+        }
     }
 
     private void createZombie() {
