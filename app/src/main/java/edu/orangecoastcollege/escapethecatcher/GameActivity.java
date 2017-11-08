@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class GameActivity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity implements GestureDetector.OnGestureListener{
 
     private GestureDetector gestureDetector;
 
@@ -66,6 +67,8 @@ public class GameActivity extends AppCompatActivity {
         layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         allGameObjects = new ArrayList<>();
+
+        gestureDetector = new GestureDetector(this, this);
 
         startNewGame();
 
@@ -156,7 +159,39 @@ public class GameActivity extends AppCompatActivity {
     private void movePlayer(float velocityX, float velocityY) {
         // TODO: This method gets called by the onFling event
         // TODO: Be sure to implement the move method in the Player (model) class
+        float absX = Math.abs(velocityX);
+        float absY = Math.abs(velocityY);
+        String direction = "UNKNOWN";
 
+        if(absX > absY)
+            if(velocityX < 0)
+                direction = "LEFT";
+            else
+                direction = "RIGHT";
+        else
+            if(velocityY < 0)
+                direction = "DOWN";
+            else
+                direction = "UP";
+
+        if (!direction.equals("UNKNOWN")) {
+            player.move(gameBoard, direction);
+
+            playerImageView.setX(player.getCol() * SQUARE + OFFSET);
+            playerImageView.setY(player.getRow() * SQUARE + OFFSET);
+
+            zombie.move(gameBoard, player.getCol(), player.getRow());
+            zombieImageView.setX(zombie.getCol() * SQUARE + OFFSET);
+            zombieImageView.setY(zombie.getRow() * SQUARE + OFFSET);
+        }
+
+        if (player.getCol() == exitCol && player.getRow() == exitRow) {
+            ++wins;
+            startNewGame();
+        } else if (player.getCol() == zombie.getCol() && player.getRow() == zombie.getRow()) {
+            ++losses;
+            startNewGame();
+        }
         // TODO: Determine which absolute velocity is greater (x or y)
         // TODO: If x is negative, move player left.  Else if x is positive, move player right.
         // TODO: If y is negative, move player down.  Else if y is positive, move player up.
@@ -164,4 +199,39 @@ public class GameActivity extends AppCompatActivity {
         // TODO: Then move the zombie, using the player's row and column position.
     }
 
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return gestureDetector.onTouchEvent(event);
+    }
+
+    @Override
+    public boolean onDown(MotionEvent motionEvent) {
+        return false;
+    }
+
+    @Override
+    public void onShowPress(MotionEvent motionEvent) {
+
+    }
+
+    @Override
+    public boolean onSingleTapUp(MotionEvent motionEvent) {
+        return false;
+    }
+
+    @Override
+    public boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
+        return false;
+    }
+
+    @Override
+    public void onLongPress(MotionEvent motionEvent) {
+
+    }
+
+    @Override
+    public boolean onFling(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
+        movePlayer(v, v1);
+        return true;
+    }
 }
