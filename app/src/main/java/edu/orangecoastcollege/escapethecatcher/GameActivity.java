@@ -138,6 +138,18 @@ public class GameActivity extends AppCompatActivity {
     private void createPlayer() {
         // TODO: Determine where to place the Player (at game start)
         // TODO: Then, inflate the player layout
+        int row = 1;
+        int col = 2;
+        playerImageView = (ImageView) layoutInflater.inflate(R.layout.player_layout, null);
+        playerImageView.setX(col * SQUARE + OFFSET);
+        playerImageView.setY(row * SQUARE + OFFSET);
+
+        activityGameRelativeLayout.addView(playerImageView);
+        allGameObjects.add(playerImageView);
+
+        player = new Player();
+        player.setCol(col);
+        player.setRow(row);
     }
 
 
