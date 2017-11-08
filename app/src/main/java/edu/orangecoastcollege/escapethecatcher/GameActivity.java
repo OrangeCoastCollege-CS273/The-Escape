@@ -121,6 +121,18 @@ public class GameActivity extends AppCompatActivity {
     private void createZombie() {
         // TODO: Determine where to place the Zombie (at game start)
         // TODO: Then, inflate the zombie layout
+        int row = 2;
+        int col = 4;
+        zombieImageView = (ImageView) layoutInflater.inflate(R.layout.zombie_layout, null);
+        zombieImageView.setX(col * SQUARE + OFFSET);
+        zombieImageView.setY(row * SQUARE + OFFSET);
+
+        activityGameRelativeLayout.addView(zombieImageView);
+        allGameObjects.add(zombieImageView);
+
+        zombie = new Zombie();
+        zombie.setRow(row);
+        zombie.setCol(col);
     }
 
     private void createPlayer() {
