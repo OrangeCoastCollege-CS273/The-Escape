@@ -4,6 +4,12 @@ public class Player {
     private int mRow;
     private int mCol;
 
+    /**
+     * Handles player movement
+     * Only moves the player if there is no obstruction
+     * @param gameBoard The board which the player resides on
+     * @param direction The direction the player is trying to move
+     */
     public void move(int[][] gameBoard, String direction) {
 
         // TODO: Implement the logic for the move operation
