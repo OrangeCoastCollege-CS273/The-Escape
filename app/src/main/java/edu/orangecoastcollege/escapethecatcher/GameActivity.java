@@ -56,6 +56,16 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
 
     private LayoutInflater layoutInflater;
 
+    /**
+     * Connects necessary views to code
+     *
+     * Initializes {@link LayoutInflater}
+     *
+     * assigns {@link ArrayList} to allGameObjects
+     *
+     * initializes {@link GestureDetector}
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,6 +131,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
         }
     }
 
+
     private void createZombie() {
         // TODO: Determine where to place the Zombie (at game start)
         // TODO: Then, inflate the zombie layout
@@ -138,6 +149,7 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
         zombie.setCol(col);
     }
 
+
     private void createPlayer() {
         // TODO: Determine where to place the Player (at game start)
         // TODO: Then, inflate the player layout
@@ -154,7 +166,6 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
         player.setCol(col);
         player.setRow(row);
     }
-
 
     private void movePlayer(float velocityX, float velocityY) {
         // TODO: This method gets called by the onFling event
@@ -199,36 +210,74 @@ public class GameActivity extends AppCompatActivity implements GestureDetector.O
         // TODO: Then move the zombie, using the player's row and column position.
     }
 
+    /**
+     * Tells android gestureDetector will handle touch events
+     * @param event
+     * @return
+     */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         return gestureDetector.onTouchEvent(event);
     }
 
+    /**
+     * not used
+     * @param motionEvent
+     * @return
+     */
     @Override
     public boolean onDown(MotionEvent motionEvent) {
         return false;
     }
 
+    /**
+     * not used
+     * @param motionEvent
+     * @return
+     */
     @Override
     public void onShowPress(MotionEvent motionEvent) {
 
     }
 
+    /**
+     * not used
+     * @param motionEvent
+     * @return
+     */
     @Override
     public boolean onSingleTapUp(MotionEvent motionEvent) {
         return false;
     }
 
+    /**
+     * not used
+     * @param motionEvent
+     * @return
+     */
     @Override
     public boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
         return false;
     }
 
+    /**
+     * not used
+     * @param motionEvent
+     * @return
+     */
     @Override
     public void onLongPress(MotionEvent motionEvent) {
 
     }
 
+    /**
+     * calls movePlayer on fling
+     * @param motionEvent not used
+     * @param motionEvent1 not used
+     * @param v x velocity
+     * @param v1 y velocity
+     * @return true
+     */
     @Override
     public boolean onFling(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
         movePlayer(v, v1);
