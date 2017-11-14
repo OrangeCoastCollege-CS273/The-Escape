@@ -3,9 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/The-Escape.iml" filepath="$PROJECT_DIR$/The-Escape.iml" />
-      <module fileurl="file://$PROJECT_DIR$/TheEscape.iml" filepath="$PROJECT_DIR$/TheEscape.iml" />
+      <module fileurl="file://C:\Users\Severiano Badajoz\IdeaProjects\The-Escape\The-Escape.iml" filepath="C:\Users\Severiano Badajoz\IdeaProjects\The-Escape\The-Escape.iml" />
+      <module fileurl="file://C:\Users\Severiano Badajoz\IdeaProjects\The-Escape\TheEscape.iml" filepath="C:\Users\Severiano Badajoz\IdeaProjects\The-Escape\TheEscape.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\Severiano Badajoz\IdeaProjects\The-Escape\app\app.iml" filepath="C:\Users\Severiano Badajoz\IdeaProjects\The-Escape\app\app.iml" />
     </modules>
   </component>
 </project>
